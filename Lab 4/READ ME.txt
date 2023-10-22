@@ -1,0 +1,18 @@
+I have used fopen, fgetc and fputc to do the file handling operations.
+
+fopen - opens the file
+
+fgetc - it is used to obtain input from a file single character at a time
+
+fputc()- it is used to write a single character at a time to a given file
+
+Instructions to compile -
+
+step 1) 'cat'both files
+
+step 2) Type 
+gcc -apathan_Lab03 apathan_Lab03.c
+
+step 3) Enter file names
+
+step 4) 'cat' both files 
