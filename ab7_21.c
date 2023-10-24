@@ -138,23 +138,23 @@ void myFunc(const char *dir_path, int depth, long size, const char *pattern, int
     }
     closedir(dir);
 }
-
 void executeCommand(const char *command, const char *path, int fileDetails) {
-    size_t full_command_size = strlen(command) + 1 + strlen(path) + 1; // +1 for space, +1 for null terminator
-    char *full_command = (char *)malloc(full_command_size);
-    if (full_command == NULL) {
-        perror("malloc");
-        return;
+    // Execute the command and ignore the output
+    int return_code = system(command);
+    (void)return_code;  // Suppress unused variable warning
+
+    if (!fileDetails) {
+        // Extract the file or directory name from the path
+        const char *file_name = strrchr(path, '/');
+        if (file_name) {
+            file_name++; // Move past the last '/'
+        } else {
+            file_name = path; // No '/' found, use the whole path
+        }
+
+        for (int i = 0; i < strlen(file_name); i++) {
+            printf("    ");
+        }
+        printf("%s\n", file_name);
     }
-
-    snprintf(full_command, full_command_size, "%s %s", command, path);
-
-    int return_code = system(full_command);
-    if (return_code == 0) {
-        printf("Command executed successfully for: %s\n", path);
-    } else {
-        printf("Command execution failed for: %s\n", path);
-    }
-
-    free(full_command);
 }
